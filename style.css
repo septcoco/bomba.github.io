@@ -1,0 +1,66 @@
+@import url(https://cdn.22is5.com/css/reset.css);
+@import url(https://cdn.22is5.com/fonts/eurostile.css);
+@import url(/css/eurostile.css);
+@import url(/css/vcr.css);
+@import url(/css/colors.css);
+body {
+  background-color: #000;
+  color: #fff;
+}
+h1 {
+  color: var(--bandito);
+  text-transform: uppercase;
+}
+.banner {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Eurostile";
+  gap: 24px;
+  border-bottom: solid 4px var(--bandito);
+  background-color: #000;
+}
+.left,
+.right {
+  font-size: 24px;
+  display: flex;
+  gap: 24px;
+  text-transform: uppercase;
+  width: 33.3333333%;
+  justify-content: right;
+}
+.right {
+  justify-content: left;
+}
+.center {
+  font-size: 48px;
+  background-color: #000;
+  transform: translate(0, 10px);
+  padding: 0 18px;
+}
+#random {
+  text-transform: uppercase;
+  font-family: "VCR";
+  padding: 12px;
+  text-align: center;
+  font-size: 18px;
+}
+.contentWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 24px 6px;
+}
+.content {
+  width: 600px;
+  max-width: 100%;
+  font-family: "VCR";
+  font-size: 15px;
+}
+h2 {
+  font-family: "Eurostile";
+  text-transform: uppercase;
+  font-size: 24px;
+  color: var(--bandito);
+}
