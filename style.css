@@ -3,7 +3,7 @@
 @import url(https://cdn.22is5.com/fonts/source-serif.css);
 @import url(https://cdn.22is5.com/fonts/bebas-neue.css);
 :root {
-  --sideWidth: 32px;
+  --sideWidth: 64px;
   --mainWidth: 720px;
 }
 body {
@@ -23,8 +23,8 @@ body {
   max-width: 100%;
   background-color: #efefef;
   padding: 12px;
-  border-left: solid var(--sideWidth) var(--toprabblue);
-  border-right: solid var(--sideWidth) var(--toprabred);
+  border-left: solid var(--sideWidth) var(--toprabbluelogo);
+  border-right: solid var(--sideWidth) var(--toprabredlogo);
   text-align: justify;
 }
 .content a {
@@ -36,11 +36,11 @@ body {
   width: 32px;
 }
 .left {
-  background-color: var(--toprabblue);
+  background-color: var(--toprabbluelogo);
 }
 
 .right {
-  background-color: var(--toprabred);
+  background-color: var(--toprabredlogo);
 }
 .bar {
   background-color: #000;
@@ -56,6 +56,7 @@ body {
   font-size: 24px;
   letter-spacing: 4px;
   user-select: none;
+  text-transform: uppercase;
 }
 .sub {
   opacity: 0.64;
@@ -77,4 +78,28 @@ body {
   max-width: 50%;
   image-rendering: pixelated;
   filter: contrast(6%) brightness(12%);
+}
+.logoPane {
+  width: 100%;
+  height: 336px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo {
+  width: 100%;
+}
+h1 {
+  font-size: 48px;
+  text-align: center;
+  font-family: "Bebas Neue";
+  color: var(--toprabredlogo);
+  letter-spacing: 4px;
+}
+.tracks {
+  font-size: 24px;
+  font-family: "Bebas Neue";
+  letter-spacing: 4px;
+  padding: 0 72px;
+  line-height: 1.3;
 }
