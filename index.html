@@ -1,44 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style>
+      body {
+        background-color: var(--topblurryblack);
+        color: var(--topblurrywhite);
+        overflow: hidden;
+      }
+    </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/style.css" />
-    <link rel="shortcut icon" href="/icon.png" type="image/x-icon" />
     <title>East is Up</title>
   </head>
   <body>
-    <div class="bg">
-      <img src="img/bglogo.png" draggable="false" />
+    <div class="bg">checkthedoors<br />checkthewindOws<br />pulltheblinds</div>
+    <div class="page">
+      <input type="password" id="passwordInput" placeholder="" />
+      <button id="submit" onclick="checkPassword()">></button>
     </div>
-    <div class="contentWrapper">
-      <!-- <div class="bar">eastisup.com</div> -->
-      <div class="content">
-        <div class="logoPane">
-          <img src="/img/headerLogo.png" alt="" class="logo" />
-        </div>
-      </div>
-      <div class="bar" id="random"></div>
-      <div class="content">
-        <h1>Regional at Best</h1>
-        <div class="tracks">
-          <p>Guns for Hands</p>
-          <p>Holding on to You</p>
-          <p>Ode to Sleep</p>
-          <p>Slowtown</p>
-          <p>Car Radio</p>
-          <p>Forest</p>
-          <p>Glowing Eyes</p>
-          <p>Kitchen Sink</p>
-          <p>Anathema</p>
-          <p>Lovely</p>
-          <p>Ruby</p>
-          <p>Trees</p>
-          <p>Be Concerned</p>
-          <p>Clear</p>
-        </div>
-      </div>
-    </div>
-    <script src="/js/motd.js"></script>
+    <script src="/login/auth.js"></script>
   </body>
 </html>
