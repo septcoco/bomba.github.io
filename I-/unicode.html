@@ -68,6 +68,7 @@
 
         .left {
             color: var(--topblurryred);
+            display: flex;
         }
 
         .right {
@@ -76,6 +77,20 @@
             padding: 8px;
             border-radius: 12px;
             cursor: pointer;
+        }
+
+        .spacer {
+            width: 8px;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+        }
+
+        .slash {
+            width: 36px;
+            color: #fff;
+            display: flex;
+            justify-content: center;
         }
     </style>
     <meta charset="UTF-8">
@@ -93,7 +108,13 @@
     <h3>Logos</h3>
     <div class="list">
         <div class="set">
-            <div class="left">RAB / Vessel</div>
+            <div class="left">
+                <span style="color:var(--toprabblue)">R</span>
+                <span style="color:var(--toprabwhite)">A</span>
+                <span style="color:var(--toprabred)">B</span>
+                <div class="slash">/</div>
+                <span style="color:var(--topvesselblue)">Vessel</span>
+            </div>
             <div class="right">⊬</div>
         </div>
         <div class="set">
@@ -101,19 +122,37 @@
             <div class="right">|-/</div>
         </div>
         <div class="set">
-            <div class="left">Trench</div>
+            <div class="left">
+                <span style="color:var(--bandito)">Trench</span>
+            </div>
             <div class="right">||-//</div>
         </div>
         <div class="set">
-            <div class="left">Scaled & Icy</div>
+            <div class="left">
+                <span style="color:var(--topsaipink)">Scaled</span>
+                <div class="spacer"></div>
+                <span style="color:var(--topsaiyellow)">&</span>
+                <div class="spacer"></div>
+                <span style="color:var(--topsaiblue)">Icy</span>
+            </div>
             <div class="right">(ψ)</div>
         </div>
         <div class="set">
-            <div class="left">Scaled & Icy</div>
+            <div class="left">
+                <span style="color:var(--topsaiblue)">Scaled</span>
+                <div class="spacer"></div>
+                <span style="color:var(--topsaiyellow)">&</span>
+                <div class="spacer"></div>
+                <span style="color:var(--topsaipink)">Icy</span>
+            </div>
             <div class="right">(Ψ)</div>
         </div>
         <div class="set">
-            <div class="left">Clancy</div>
+            <div class="left">
+                <span style="color:var(--topclancyred)">Cl</span>
+                <span style="color:var(--topclancyyellow)">an</span>
+                <span style="color:var(--topclancyred)">cy</span>
+            </div>
             <div class="right">(]-/)</div>
         </div>
     </div>
@@ -139,7 +178,7 @@
                     navigator.clipboard.writeText(textToCopy)
                         .then(() => {
                             console.log('Text copied to clipboard: ' + textToCopy);
-                            this.style.backgroundColor = 'var(--bandito)';
+                            this.style.backgroundColor = '#aaa';
                             setTimeout(() => {
                                 this.style.backgroundColor = '';
                             }, 200);
