@@ -19,4 +19,4 @@ jobs:
           api_token: ${{ secrets.NEOCITIES_API_TOKEN }}
           cleanup: true
           neocities_supporter: true
-          dist_dir: ./
+          dist_dir: ./root
