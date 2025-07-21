@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        @import url(https://cdn.22is5.com/css/reset.css);
+        @import url(https://cdn.22is5.com/css/colors.css);
+        @import url(https://cdn.22is5.com/fonts/clancy.css);
+        @import url(https://cdn.22is5.com/fonts/bank-gothic.css);
+
+        body {
+            background-color: var(--topblurryblack);
+            color: var(--topblurrywhite);
+            overflow: hidden;
+        }
+
+        .page {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            gap: 12px;
+        }
+
+        .bg {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 1.6;
+            filter: blur(0.25vw);
+            font-family: "Clancy";
+            font-size: 2vw;
+            opacity: 0.1;
+            transform: scale(2.5) rotate(-2deg);
+            user-select: none;
+            pointer-events: none;
+            z-index: -1;
+            text-align: center;
+        }
+
+        #passwordInput,
+        #submit {
+            background-color: var(--topblurryblack);
+            border: solid 2px var(--topblurrywhite);
+            color: var(--topblurrywhite);
+            font-family: "Bank Gothic Medium";
+            font-size: 32px;
+            padding: 24px;
+            text-transform: uppercase;
+        }
+
+        #passwordInput:hover {
+            border-color: var(--topblurryred);
+        }
+
+        #passwordInput:focus {
+            outline: none;
+            border-color: var(--topblurryred);
+        }
+
+        #submit:hover {
+            border-color: var(--topblurryred);
+            color: var(--topblurryred);
+        }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PASSWORD PROTECTED</title>
+</head>
+
+<body>
+    <div class="bg">checkthedoors<br />checkthewindOws<br />pulltheblinds</div>
+    <div class="page">
+        <input type="password" id="passwordInput" placeholder="" />
+        <button id="submit" onclick="checkPassword()">></button>
+    </div>
+    <script src="/login/auth.js"></script>
+</body>
+
+</html>

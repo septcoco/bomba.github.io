@@ -1,56 +1,56 @@
-@import url(https://cdn.22is5.com/css/reset.css);
-@import url(https://cdn.22is5.com/css/colors.css);
-@import url(https://cdn.22is5.com/fonts/clancy.css);
-@import url(https://cdn.22is5.com/fonts/bank-gothic.css);
+@import url("https://cdn.22is5.com/css/reset.css");
+@import url("https://cdn.22is5.com/css/colors.css");
+@import url("https://cdn.22is5.com/fonts/vcr.css");
+@import url("https://cdn.22is5.com/fonts/source-serif.css");
+
+:root {
+    --bgc: var(--topblurryblack);
+    --mainbgc: var(--topsaiwhite);
+    --textColor: var(--topblurrywhite);
+    --accent1: var(--topblurryred);
+}
+
 body {
-  background-color: var(--topblurryblack);
-  color: var(--topblurrywhite);
-  overflow: hidden;
+    background-color: var(--bgc);
+    color: var(--topblurrywhite);
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    font-family: "Source Serif";
 }
-.page {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  gap: 12px;
+
+.content {
+    width: 640px;
+    height: fit-content;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
-.bg {
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  line-height: 1.6;
-  filter: blur(0.25vw);
-  font-family: "Clancy";
-  font-size: 2vw;
-  opacity: 0.1;
-  transform: scale(2.5) rotate(-2deg);
-  user-select: none;
-  pointer-events: none;
-  z-index: -1;
-  text-align: center;
+
+.content p {
+    line-height: 1.3;
+    text-align: justify;
+    font-size: 18px;
+    letter-spacing: 1px;
 }
-#passwordInput,
-#submit {
-  background-color: var(--topblurryblack);
-  border: solid 2px var(--topblurrywhite);
-  color: var(--topblurrywhite);
-  font-family: "Bank Gothic Medium";
-  font-size: 32px;
-  padding: 24px;
-  text-transform: uppercase;
+
+h2 {
+    font-family: "VCR";
+    padding: 12px 0;
+    letter-spacing: 8px;
+    font-size: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--textColor);
+    width: 100%;
+    background-color: var(--bgc);
 }
-#passwordInput:hover {
-  border-color: var(--topblurryred);
+
+.bannerImg {
+    width: 100%;
 }
-#passwordInput:focus {
-  outline: none;
-  border-color: var(--topblurryred);
-}
-#submit:hover {
-  border-color: var(--topblurryred);
-  color: var(--topblurryred);
+
+.spacer {
+    height: 64px;
 }
