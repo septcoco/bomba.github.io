@@ -18,10 +18,12 @@
             font-family: 'Roboto';
             font-weight: 300;
             letter-spacing: 2px;
+            user-select: none;
         }
 
         .disclaimer {
             padding: 24px 0 0 0;
+            line-height: 1.6;
         }
 
         h1 {
@@ -61,6 +63,7 @@
             padding: 6px;
             justify-content: center;
             align-items: center;
+            width: 640px;
         }
 
         .left {
@@ -72,6 +75,7 @@
             color: var(--topblurryblack);
             padding: 8px;
             border-radius: 12px;
+            cursor: pointer;
         }
     </style>
     <meta charset="UTF-8">
@@ -83,7 +87,9 @@
 <body>
     <h1>Twenty One Pilots</h1>
     <h2>Unicode</h2>
-    <p class="disclaimer">Keep in mind that these won't look the same on every platform!</p>
+    <p class="disclaimer">Keep in mind that these won't look the same on every platform!
+        <br>Click to copy.
+    </p>
     <h3>Logos</h3>
     <div class="list">
         <div class="set">
@@ -100,7 +106,11 @@
         </div>
         <div class="set">
             <div class="left">Scaled & Icy</div>
-            <div class="right">(ψ) (Ψ)</div>
+            <div class="right">(ψ)</div>
+        </div>
+        <div class="set">
+            <div class="left">Scaled & Icy</div>
+            <div class="right">(Ψ)</div>
         </div>
         <div class="set">
             <div class="left">Clancy</div>
@@ -109,13 +119,38 @@
     </div>
     <h3>Dashed O's</h3>
     <div class="list">
-        <div class="left">O</div>
-        <div class="right">Ø</div>
+        <div class="set">
+            <div class="left">O</div>
+            <div class="right">Ø</div>
+        </div>
+        <div class="set">
+            <div class="left">o</div>
+            <div class="right">ø</div>
+        </div>
     </div>
-    <div class="list">
-        <div class="left">o</div>
-        <div class="right">ø</div>
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const rightElements = document.querySelectorAll('.right');
+
+            rightElements.forEach(element => {
+                element.addEventListener('click', function () {
+                    const textToCopy = this.textContent;
+
+                    navigator.clipboard.writeText(textToCopy)
+                        .then(() => {
+                            console.log('Text copied to clipboard: ' + textToCopy);
+                            this.style.backgroundColor = 'var(--bandito)';
+                            setTimeout(() => {
+                                this.style.backgroundColor = '';
+                            }, 200);
+                        })
+                        .catch(err => {
+                            console.error('Failed to copy text: ', err);
+                        });
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
