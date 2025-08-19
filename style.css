@@ -113,3 +113,13 @@ h1 {
 .option {
     font-size: 32px;
 }
+
+.wallpapers {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.wallpaper {
+    width: 50%;
+}
