@@ -1,14 +1,13 @@
 @import url('https://cdn.eastisup.com/css/reset.css');
 @import url('https://cdn.eastisup.com/css/colors.css');
 @import url('https://cdn.eastisup.com/fonts/futura.css');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 .bg {
     position: fixed;
     top: 0;
     width: 100%;
     height: 100vh;
-    background-image: url(/img/fuzz.jpg);
+    background-image: url("/img/fuzz.jpg");
     background-size: cover;
     background-position: center;
     z-index: -1;
@@ -16,110 +15,27 @@
 }
 
 body {
-    background-color: #000;
-    color: var(--topblurrywhite);
-    font-family: 'Roboto';
-    display: flex;
-    justify-content: center;
+    color: #fff;
 }
 
-.content {
-    width: 640px;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    border: solid 2px var(--topblurryred);
-}
-
-.tag {
-    color: var(--topblurryblack);
-    font-family: 'Futura Light';
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    font-size: 32px;
-    letter-spacing: 18px;
-    padding: 6px 0;
-    background-color: var(--topblurryred);
-}
-
-.unicodeWrapper {
-    padding: 12px;
-    height: fit-content;
-    max-height: 400px;
-    overflow-y: scroll;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    scrollbar-width: thin;
-    scrollbar-color: var(--topblurrywhite) transparent;
-}
-
-.row {
-    width: 100%;
-    border: solid 2px var(--topblurrywhite);
-    display: flex;
-    flex-direction: column;
-}
-
-.name {
-    padding: 6px;
-    font-size: 24px;
-}
-
-.unicode {
-    display: flex;
-    padding: 6px;
-    gap: 6px;
-}
-
-.copy {
-    padding: 12px;
-    border-radius: 6px;
-    font-size: 24px;
-    width: fit-content;
-    background-color: var(--topblurrywhite);
-    color: var(--topblurryblack);
-}
-
-h1 {
-    font-family: 'Futura Light';
-    text-transform: uppercase;
-    font-size: 32px;
-    letter-spacing: 12px;
-    text-align: center;
-}
-
-.logo {
+.wrap {
     width: 100%;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-size: 48px;
+    font-family: "Futura Light";
+    text-transform: uppercase;
+    letter-spacing: 24px;
 }
 
-.title {
+h1 {
+    font-family: "Futura Light";
     font-size: 64px;
 }
 
-.option {
-    font-size: 32px;
-}
-
-.wallpapers {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.wallpaper {
-    width: 50%;
+a {
+    color: var(--topblurryred);
 }
