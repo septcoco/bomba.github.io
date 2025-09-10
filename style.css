@@ -1,6 +1,8 @@
 @import url("css/reset.css");
 @import url("https://cdn.eastisup.com/css/colors.css");
 @import url("assets/fonts/futura/font.css");
+@import url("assets/fonts/eurostile/font.css");
+@import url("assets/fonts/minecraft/font.css");
 
 .bg {
   position: fixed;
@@ -28,16 +30,18 @@ body {
   font-size: 48px;
   font-family: "Futura Light";
   text-transform: uppercase;
-  letter-spacing: 24px;
 }
 
 h1 {
-  font-family: "Futura Light";
+  font-family: "Eurostile Bold";
   font-size: 64px;
+  padding: 0 12px;
+  letter-spacing: 6px;
 }
 
 a {
-  color: var(--topblurryred);
+  color: var(--bandito);
+  letter-spacing: 18px;
 }
 
 .tape {
@@ -45,4 +49,22 @@ a {
   width: 25vw;
   user-select: none;
   pointer-events: none;
+  filter: hue-rotate(56deg) brightness(180%);
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  font-size: 28px;
+  width: 590px;
+  gap: 6px;
+  margin: 3px 0 0 0;
+}
+
+.content {
+  height: 50vh;
+  margin-top: 50vh;
+  width: 640px;
+  padding: 12px;
+  border-radius: 12px 12px 0 0;
 }

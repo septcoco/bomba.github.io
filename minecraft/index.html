@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="icon.png" type="image/x-icon" />
+  <meta property="og:image" content="icon.png" />
+  <meta property="og:description" content="Trench Minecraft Server" />
+  <meta property="og:title" content="Trench Minecraft Server" />
+  <link rel="stylesheet" href="minecraft.css" />
+  <title>22is5 Minecraft Server</title>
+</head>
+
+<body>
+  <div class="bg"></div>
+  <div class="tooltip" id="dema-tooltip">
+    <div class="tooltip-info">
+      <div class="tooltip-title red bold">DEMA</div>
+      <div class="tooltip-line">Faction</div>
+      <div class="tooltip-line gray">No Active Members</div>
+      <div class="tooltip-br"></div>
+      <div class="tooltip-line gray">Admin Faction</div>
+      <div class="tooltip-br"></div>
+      <div class="tooltip-line red">Default Attributes</div>
+    </div>
+  </div>
+  <div class="tooltip" id="banditos-tooltip">
+    <div class="tooltip-info">
+      <div class="tooltip-title uncommon bold">Banditos</div>
+      <div class="tooltip-line">Faction</div>
+      <div class="tooltip-line gray">No Active Members</div>
+      <div class="tooltip-br"></div>
+      <div class="tooltip-line yellow">Default Attributes</div>
+    </div>
+  </div>
+  <div class="tooltip" id="information-tooltip">
+    <div class="tooltip-info">
+      <div class="tooltip-title bold">Information</div>
+      <div class="tooltip-line gold mono">IP Redacted</div>
+      <div class="tooltip-line">Vanilla 1.21.8</div>
+      <div class="tooltip-line">Bedrock Port: XXXXX</div>
+      <div class="tooltip-br"></div>
+      <div class="tooltip-line bold red">Rules</div>
+      <div class="tooltip-line">- Don't Grief</div>
+      <div class="tooltip-line">- Don't Steal</div>
+      <div class="tooltip-line">- Don't Cheat</div>
+      <div class="tooltip-line">- No Politics</div>
+      <div class="tooltip-line">- Minimal Religion</div>
+      <div class="tooltip-line">- No Slurs</div>
+      <div class="tooltip-line italic gray">Everything is handled on</div>
+      <div class="tooltip-line italic gray">a case-by-case basis.</div>
+    </div>
+  </div>
+  <div class="tooltip" id="discord-tooltip">
+    <div class="tooltip-info">
+      <div class="tooltip-title bold">Discord</div>
+      <div class="tooltip-line blurple">Click to join!</div>
+    </div>
+  </div>
+  <!-- /special -->
+
+  <!-- actual content -->
+  <div class="wrap">
+    <div class="content">
+      <img src="textures/gui/title/minecraft.png" class="title" draggable="false" />
+      <a class="button information">
+        <img src="textures/gui/sprites/icon/info.png" class="ico" draggable="false" />
+        <div class="button__text">Information</div>
+      </a>
+      <a href="https://eastisup.com/@/discord" target="_blank" class="button discord">
+        <img src="textures/gui/sprites/toast/social_interactions.png" class="ico" draggable="false"
+          style="filter: brightness(100%); transform: scale(1.5)" />
+        <div class="button__text">Discord</div>
+      </a>
+      <div class="factions">
+        <img src="factions/dema.png" alt="Dema" class="banner dema" draggable="false" />
+        <img src="factions/banditos.png" alt="Banditos" class="banner banditos" draggable="false" />
+      </div>
+      <div class="spacer"></div>
+      <a href="../" class="button">
+        <div class="button__text">Leave the City</div>
+      </a>
+    </div>
+  </div>
+  <script src="pumpkin.js"></script>
+  <script>// minceraft
+    const titleImage = document.querySelector("img.title");
+
+    const random = Math.floor(Math.random() * 100) + 1;
+
+    if (random === 64) {
+      titleImage.src = "textures/gui/title/minceraft.png";
+    } else {
+      titleImage.src = "textures/gui/title/minecraft.png";
+    }
+  </script>
+  <script src="js/click.js"></script>
+  <script src="js/tooltips.js"></script>
+</body>
+
+</html>

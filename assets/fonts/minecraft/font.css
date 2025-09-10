@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "Minecraft Seven";
+  src: url("Minecraft-Seven_v2.ttf");
+}
+
+@font-face {
+  font-family: "Minecraft Bold";
+  src: url("minecraft-bold.otf");
+}
+
+@font-face {
+  font-family: "Minecraft Italic";
+  src: url("minecraft-italic.otf");
+}
+
+@font-face {
+  font-family: "Minecraft Bold Italic";
+  src: url("minecraft-bolditalic.otf");
+}
+
+@font-face {
+  font-family: "Minecraft Mono";
+  src: url("minecraft-mono.otf");
+}
+
+@font-face {
+  font-family: "Minecraft Ten";
+  src: url("Minecraft-Tenv2.ttf");
+}
