@@ -1,41 +1,48 @@
-@import url('https://cdn.eastisup.com/css/reset.css');
-@import url('https://cdn.eastisup.com/css/colors.css');
-@import url('https://cdn.eastisup.com/fonts/futura.css');
+@import url("css/reset.css");
+@import url("https://cdn.eastisup.com/css/colors.css");
+@import url("assets/fonts/futura/font.css");
 
 .bg {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    background-image: url("/img/fuzz.jpg");
-    background-size: cover;
-    background-position: center;
-    z-index: -1;
-    filter: brightness(50%);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url("/img/fuzz.jpg");
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+  filter: brightness(50%);
 }
 
 body {
-    color: #fff;
+  color: #fff;
 }
 
 .wrap {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    font-size: 48px;
-    font-family: "Futura Light";
-    text-transform: uppercase;
-    letter-spacing: 24px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 48px;
+  font-family: "Futura Light";
+  text-transform: uppercase;
+  letter-spacing: 24px;
 }
 
 h1 {
-    font-family: "Futura Light";
-    font-size: 64px;
+  font-family: "Futura Light";
+  font-size: 64px;
 }
 
 a {
-    color: var(--topblurryred);
+  color: var(--topblurryred);
+}
+
+.tape {
+  position: fixed;
+  width: 25vw;
+  user-select: none;
+  pointer-events: none;
 }
