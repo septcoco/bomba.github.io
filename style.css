@@ -2,7 +2,12 @@
 @import url("https://cdn.eastisup.com/css/colors.css");
 @import url("assets/fonts/futura/font.css");
 @import url("assets/fonts/eurostile/font.css");
+@import url("assets/fonts/clancy/font.css");
 @import url("assets/fonts/minecraft/font.css");
+
+:root {
+  --primary: var(--topblurryred);
+}
 
 .bg {
   position: fixed;
@@ -18,6 +23,7 @@
 
 body {
   color: #fff;
+  user-select: none;
 }
 
 .wrap {
@@ -33,14 +39,14 @@ body {
 }
 
 h1 {
-  font-family: "Eurostile Bold";
-  font-size: 64px;
+  font-family: "Clancy";
+  font-size: 35px;
   padding: 0 12px;
   letter-spacing: 6px;
 }
 
 a {
-  color: var(--topblurryred);
+  color: var(--primary);
   letter-spacing: 18px;
 }
 
@@ -63,7 +69,7 @@ a {
 
 .content {
   height: 50vh;
-  margin-top: 50vh;
+  /* margin-top: 50vh; */
   width: 640px;
   padding: 12px;
   border-radius: 12px 12px 0 0;
