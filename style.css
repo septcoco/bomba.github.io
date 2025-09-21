@@ -40,7 +40,7 @@ h1 {
 }
 
 a {
-  color: var(--bandito);
+  color: var(--topblurryred);
   letter-spacing: 18px;
 }
 
@@ -49,7 +49,7 @@ a {
   width: 25vw;
   user-select: none;
   pointer-events: none;
-  filter: hue-rotate(56deg) brightness(180%);
+  /* filter: hue-rotate(56deg) brightness(180%); */
 }
 
 .links {
