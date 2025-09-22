@@ -1,525 +1,285 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover"
-  />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Twenty One Pilots Unicode</title>
 
+  <!-- Tailwind CSS (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bg: "#0b0b0f",
+            card: "rgba(255,255,255,0.06)",
+            stroke: "rgba(255,255,255,0.12)",
+            ring: "rgba(255,255,255,0.25)",
+          },
+          boxShadow: {
+            soft: "0 10px 30px rgba(0,0,0,.35)",
+          },
+        }
+      }
+    }
+  </script>
+
+  <!-- React / ReactDOM / Framer Motion (UMD) + Babel -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/framer-motion@11.0.8/dist/framer-motion.umd.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
   <style>
-    /* Base */
-    :root{
-      --bg: #070709;
-      --text: #ffffff;
-      --muted: #b9c0d0;
-      --surface: rgba(255,255,255,0.05);
-      --surface-2: rgba(255,255,255,0.08);
-      --stroke: rgba(255,255,255,0.10);
-      --ring: rgba(255,255,255,0.35);
-      --shadow: 0 10px 30px rgba(0,0,0,.45);
-    }
-    *{ box-sizing: border-box; }
-    html, body { height: 100%; }
-    body{
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* Fluid canvas background */
-    .bg {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
-      pointer-events: none;
-    }
-    /* Subtle grain on top for texture */
+    html, body { height: 100% }
+    body { background: #0b0b0f; color: #fff; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale }
+    /* Subtle grain */
     .grain {
-      content: "";
-      position: fixed;
-      inset: -50%;
-      z-index: -1;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
-      background-size: 160px 160px;
-      animation: grainMove 14s linear infinite;
-      mix-blend-mode: soft-light;
-      pointer-events: none;
+      position: fixed; inset: -50%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+      background-size: 180px 180px; mix-blend-mode: soft-light; pointer-events: none; z-index: -1;
+      animation: grainMove 18s linear infinite;
     }
-    @keyframes grainMove {
-      0% { transform: translate3d(0,0,0) }
-      100% { transform: translate3d(-10%, -10%, 0) }
-    }
-
-    /* Layout */
-    .content{
-      position: relative;
-      max-width: 980px;
-      margin: 5rem auto 6.5rem;
-      padding: 0 22px;
-    }
-
-    /* Sections (glassy cards) */
-    .section{
-      position: relative;
-      margin: 28px 0;
-      padding: 20px 18px 8px;
-      background: var(--surface);
-      border: 1px solid var(--stroke);
-      border-radius: 18px;
-      backdrop-filter: blur(10px) saturate(120%);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-    /* Shimmer border */
-    .section::after{
-      content:"";
-      position:absolute; inset:-1px;
-      border-radius:inherit;
-      background:
-        conic-gradient(from 0turn, rgba(255,255,255,.12), rgba(255,255,255,0) 25%, rgba(255,255,255,.12) 50%, rgba(255,255,255,0) 75%, rgba(255,255,255,.12));
-      mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      mask-composite: exclude;
-      -webkit-mask-composite: xor;
-      padding: 1px;
-      opacity: .25;
-      pointer-events: none;
-      animation: spin 18s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(1turn) } }
-
-    /* Tag chip */
-    .tag{
-      position: absolute;
-      top: -12px; left: 14px;
-      padding: 6px 12px;
-      font-size: 12px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      border-radius: 999px;
-      background: var(--surface-2);
-      border: 1px solid var(--stroke);
-      backdrop-filter: blur(6px);
-    }
-
-    /* Rows */
-    .unicodeWrapper{
-      display: grid;
-      gap: 10px;
-    }
-    .row{
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 16px;
-      align-items: center;
-      padding: 14px 10px 14px 14px;
-      border-radius: 12px;
-      transition: background 220ms ease, transform 220ms ease;
-      --mx: 50%;
-      --my: 50%;
-      background:
-        radial-gradient(40% 120% at var(--mx) var(--my), rgba(255,255,255,.09), rgba(255,255,255,0) 60%);
-    }
-    .row:hover{ transform: translateY(-1px) }
-    .name{
-      color: var(--muted);
-      font-weight: 600;
-      letter-spacing: .01em;
-    }
-    .unicode{
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-self: end;
-    }
-
-    /* Copy chips */
-    .copy{
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 42px;
-      padding: 8px 11px;
-      border-radius: 999px;
-      border: 1px solid var(--stroke);
-      background:
-        radial-gradient(60% 140% at var(--hx, 50%) var(--hy, 50%), rgba(255,255,255,.22), rgba(255,255,255,.08) 45%, rgba(255,255,255,.06) 65%),
-        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      color: var(--text);
-      cursor: pointer;
-      user-select: none;
-      transition: transform 140ms ease, border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
-      box-shadow: 0 6px 18px rgba(0,0,0,.25);
-      outline: none;
-    }
-    .copy:hover{ transform: translateY(-1px) scale(1.02); border-color: var(--ring) }
-    .copy:active{ transform: translateY(0) scale(.98) }
-    .copy:focus-visible{ box-shadow: 0 0 0 2px rgba(255,255,255,.18), 0 0 0 6px rgba(255,255,255,.12) }
-
-    /* Ripple */
-    .copy .ripple{
-      position: absolute;
-      left: var(--rx);
-      top: var(--ry);
-      width: 1px; height: 1px;
-      transform: translate(-50%,-50%);
-      pointer-events: none;
-      background: radial-gradient(circle, rgba(var(--rc,255,255,255), .35) 0%, rgba(255,255,255,0) 70%);
-      animation: ripple .6s ease-out forwards;
-      filter: blur(.2px);
-    }
-    @keyframes ripple {
-      0% { width: 0; height: 0; opacity: .7 }
-      100% { width: 280px; height: 280px; opacity: 0 }
-    }
-
-    /* Copied tooltip */
-    .copy::after{
-      content: attr(data-tip);
-      position: absolute;
-      left: 50%; top: -8px;
-      transform: translate(-50%, -100%) scale(.96);
-      padding: 6px 8px;
-      font-size: 12px;
-      color: #0c0c0c;
-      background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 6px 20px rgba(0,0,0,.35);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 160ms ease, transform 160ms ease;
-      white-space: nowrap;
-    }
-    .copy[data-copied="1"]::after{
-      opacity: 1; transform: translate(-50%,-110%) scale(1);
-    }
-
-    /* Toast */
-    .toast{
-      position: fixed;
-      left: 50%; bottom: max(18px, env(safe-area-inset-bottom));
-      transform: translate(-50%, 20px);
-      padding: 10px 14px;
-      border-radius: 12px;
-      background: rgba(255,255,255,.95);
-      color: #0b0b0b;
-      font-weight: 600;
-      box-shadow: 0 10px 30px rgba(0,0,0,.35);
-      opacity: 0;
-      transition: transform 200ms ease, opacity 200ms ease;
-      z-index: 60;
-    }
-    .toast.show { opacity: 1; transform: translate(-50%, 0) }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      .section::after, .grain{ animation: none !important }
-      .copy .ripple{ display: none }
-    }
+    @keyframes grainMove { to { transform: translate3d(-10%, -10%, 0) } }
   </style>
 </head>
-
 <body>
-  <canvas class="bg" id="blobCanvas"></canvas>
-  <div class="grain" aria-hidden="true"></div>
-
-  <div class="content">
-    <div class="section">
-      <div class="tag">Logos</div>
-      <div class="unicodeWrapper">
-        <div class="row">
-          <div class="name">RAB + Vessel</div>
-          <div class="unicode">
-            <div class="copy" tabindex="0" data-tip="Copied!">⊬</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="name">Blurryface</div>
-          <div class="unicode">
-            <div class="copy" tabindex="0" data-tip="Copied!">|-/</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="name">Trench</div>
-          <div class="unicode">
-            <div class="copy" tabindex="0" data-tip="Copied!">||-//</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="name">Scaled &amp; Icy</div>
-          <div class="unicode">
-            <div class="copy" tabindex="0" data-tip="Copied!">ψ</div>
-            <div class="copy" tabindex="0" data-tip="Copied!">Ψ</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="name">Clancy</div>
-          <div class="unicode">
-            <div class="copy" tabindex="0" data-tip="Copied!">(|-/)</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="name">DEMA</div>
-          <div class="unicode">
-            <div class="copy" tabindex="0" data-tip="Copied!">D⋲MΛ</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="name">TOPxMM</div>
-          <div class="unicode">
-            <div class="copy" tabindex="0" data-tip="Copied!">●●×○○○○</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="tag">Letters</div>
-      <div class="unicodeWrapper">
-        <div class="row">
-          <div class="name">O, o</div>
-          <div class="unicode">
-            <div class="copy" tabindex="0" data-tip="Copied!">Ø</div>
-            <div class="copy" tabindex="0" data-tip="Copied!">ø</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="tag">Characters</div>
-      <div class="unicodeWrapper">
-        <div class="row">
-          <div class="name">Ned</div>
-          <div class="unicode">
-            <div class="copy" tabindex="0" data-tip="Copied!">&lt;{•.•}&gt;</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="name">Vulture</div>
-          <div class="unicode">
-            <div class="copy" tabindex="0" data-tip="Copied!">//^&lt;•&rcub;^\\</div>
-            <div class="copy" tabindex="0" data-tip="Copied!">☬</div>
-            <div class="copy" tabindex="0" data-tip="Copied!">𓅐</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="tag">Miscellaneous</div>
-      <div class="unicodeWrapper">
-        <div class="row">
-          <div class="name">Jumpsuit Medallion</div>
-          <div class="unicode">
-            <div class="copy" tabindex="0" data-tip="Copied!">✺</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="name">Tyler's Tattoos</div>
-          <div class="unicode">
-            <div class="copy" tabindex="0" data-tip="Copied!">·|i|· Φ i✝! ] ·[</div>
-            <div class="copy" tabindex="0" data-tip="Copied!">·|i|·</div>
-            <div class="copy" tabindex="0" data-tip="Copied!">Φ</div>
-            <div class="copy" tabindex="0" data-tip="Copied!">i✝!</div>
-            <div class="copy" tabindex="0" data-tip="Copied!">] ·[</div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="name">FPE</div>
-          <div class="unicode">
-            <div class="copy" tabindex="0" data-tip="Copied!">F̶P̶E̶</div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- Aurora background -->
+  <div class="fixed inset-0 -z-10 pointer-events-none">
+    <div class="absolute inset-0 bg-[radial-gradient(1200px_800px_at_10%_10%,#1f2937_0%,transparent_45%)]"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(900px_600px_at_90%_20%,#0ea5e9_0%,transparent_35%)] opacity-60"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(1000px_700px_at_40%_90%,#f43f5e_0%,transparent_35%)] opacity-40"></div>
   </div>
+  <div class="grain"></div>
 
-  <!-- Toast -->
-  <div class="toast" id="toast" role="status" aria-live="polite">Copied to clipboard</div>
+  <div id="root"></div>
 
-  <script>
-    // =============== Liquid background (canvas blobs) ===============
-    (function(){
-      const canvas = document.getElementById('blobCanvas');
-      const ctx = canvas.getContext('2d');
-      let dpr = Math.max(1, window.devicePixelRatio || 1);
-      let w = 0, h = 0, running = true;
+  <script type="text/babel">
+    const { useState, useMemo, useEffect } = React;
+    const { motion, AnimatePresence, MotionConfig } = window.framerMotion;
 
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReduced) running = false;
-
-      const blobs = [];
-      const BLOB_COUNT = 5;
-      function rand(a,b){ return a + Math.random()*(b-a) }
-
-      function resize(){
-        w = canvas.width = Math.floor(window.innerWidth * dpr);
-        h = canvas.height = Math.floor(window.innerHeight * dpr);
-        canvas.style.width = window.innerWidth + 'px';
-        canvas.style.height = window.innerHeight + 'px';
+    // Data
+    const DATA = [
+      {
+        tag: "Logos",
+        rows: [
+          { name: "RAB + Vessel", items: ["⊬"] },
+          { name: "Blurryface", items: ["|-/"] },
+          { name: "Trench", items: ["||-//"] },
+          { name: "Scaled & Icy", items: ["ψ", "Ψ"] },
+          { name: "Clancy", items: ["(|-/)"] },
+          { name: "DEMA", items: ["D⋲MΛ"] },
+          { name: "TOPxMM", items: ["●●×○○○○"] },
+        ]
+      },
+      {
+        tag: "Letters",
+        rows: [
+          { name: "O, o", items: ["Ø", "ø"] },
+        ]
+      },
+      {
+        tag: "Characters",
+        rows: [
+          { name: "Ned", items: ["<{•.•}>"] },
+          { name: "Vulture", items: ["//^<•}^\\", "☬", "𓅐"] },
+        ]
+      },
+      {
+        tag: "Miscellaneous",
+        rows: [
+          { name: "Jumpsuit Medallion", items: ["✺"] },
+          { name: "Tyler's Tattoos", items: ["·|i|· Φ i✝! ] ·[", "·|i|·", "Φ", "i✝!", "] ·["] },
+          { name: "FPE", items: ["F̶P̶E̶"] },
+        ]
       }
+    ];
 
-      function initBlobs(){
-        blobs.length = 0;
-        for(let i=0;i<BLOB_COUNT;i++){
-          blobs.push({
-            x: rand(0.1, 0.9) * w,
-            y: rand(0.1, 0.9) * h,
-            r: rand(160, 320) * dpr,
-            ang: rand(0, Math.PI*2),
-            speed: rand(0.2, 0.6) / 1000, // radians/ms
-            amp: rand(80, 160) * dpr,
-            hue: rand(0, 360),
-            sat: rand(70, 95),
-            alp: rand(0.08, 0.16)
-          });
-        }
-      }
+    const Header = ({ query, setQuery, count }) => (
+      <div className="sticky top-0 z-10 backdrop-blur supports-[backdrop-filter]:bg-bg/60 bg-bg/80 border-b border-white/10">
+        <div className="mx-auto max-w-6xl px-4 py-4">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div className="flex items-center gap-3">
+              <div className="h-9 w-9 rounded-xl bg-white/10 grid place-items-center ring-1 ring-white/15 shadow-soft">
+                <span className="text-lg">⌘</span>
+              </div>
+              <div>
+                <h1 className="text-xl md:text-2xl font-semibold tracking-tight">Twenty One Pilots Unicode</h1>
+                <p className="text-white/60 text-sm">{count} entries</p>
+              </div>
+            </div>
+            <div className="w-full md:w-[420px]">
+              <div className="relative">
+                <input
+                  value={query}
+                  onChange={e => setQuery(e.target.value)}
+                  placeholder="Search by name or symbol…"
+                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 pr-10 outline-none text-sm placeholder:text-white/50 focus:ring-2 focus:ring-white/20"
+                />
+                <div className="absolute right-2 top-1/2 -translate-y-1/2 text-white/40">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                       strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-80">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
 
-      let last = performance.now();
-      function frame(now){
-        if (!running) return;
-        const dt = now - last; last = now;
+    const Section = ({ tag, children }) => (
+      <motion.section
+        initial={{ opacity: 0, y: 8 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: .4, ease: "easeOut" }}
+        className="rounded-2xl border border-white/10 bg-white/5 shadow-soft px-4 sm:px-5 py-5"
+      >
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-sm uppercase tracking-[0.16em] text-white/60">{tag}</h2>
+        </div>
+        {children}
+      </motion.section>
+    );
 
-        ctx.clearRect(0,0,w,h);
-        ctx.globalCompositeOperation = 'lighter';
+    const CopyChip = ({ text, onCopied }) => {
+      const [copied, setCopied] = useState(false);
 
-        for(const b of blobs){
-          b.ang += b.speed * dt;
-          const ox = Math.cos(b.ang) * b.amp;
-          const oy = Math.sin(b.ang * 0.9) * b.amp * 0.6;
-
-          const x = b.x + ox;
-          const y = b.y + oy;
-
-          const grad = ctx.createRadialGradient(x,y,0,x,y,b.r);
-          grad.addColorStop(0, `hsla(${b.hue}, ${b.sat}%, 60%, ${b.alp})`);
-          grad.addColorStop(1, `hsla(${b.hue}, ${b.sat}%, 60%, 0)`);
-
-          ctx.fillStyle = grad;
-          ctx.beginPath();
-          ctx.arc(x,y,b.r,0,Math.PI*2);
-          ctx.fill();
-        }
-        requestAnimationFrame(frame);
-      }
-
-      function start(){
-        resize();
-        initBlobs();
-        if (running) requestAnimationFrame(frame);
-      }
-
-      window.addEventListener('resize', () => {
-        resize();
-        // Keep blobs proportional
-        initBlobs();
-      }, { passive:true });
-
-      start();
-    })();
-
-    // =============== Interactive UI ===============
-    (function(){
-      const rows = document.querySelectorAll('.row');
-      const chips = document.querySelectorAll('.copy');
-      const toast = document.getElementById('toast');
-
-      // Row hover light follows pointer
-      rows.forEach(row => {
-        row.addEventListener('pointermove', (e) => {
-          const r = row.getBoundingClientRect();
-          const x = ((e.clientX - r.left) / r.width) * 100;
-          const y = ((e.clientY - r.top) / r.height) * 100;
-          row.style.setProperty('--mx', x + '%');
-          row.style.setProperty('--my', y + '%');
-        });
-      });
-
-      // Give each chip a subtle hue for highlight/ripple
-      chips.forEach((chip, i) => {
-        const hue = (i * 37) % 360;
-        chip.style.setProperty('--rc', `${Math.round(127 + 127*Math.cos((hue-30)*Math.PI/180))}, ${Math.round(127 + 127*Math.cos((hue-150)*Math.PI/180))}, ${Math.round(127 + 127*Math.cos((hue+90)*Math.PI/180))}`);
-      });
-
-      // Copy handler with ripple + tooltip + toast
-      function copyText(text){
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          return navigator.clipboard.writeText(text);
-        }
-        // Fallback
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        ta.style.position = 'fixed';
-        ta.style.left = '-999px';
-        document.body.appendChild(ta);
-        ta.focus(); ta.select();
-        try { document.execCommand('copy'); } catch {}
-        document.body.removeChild(ta);
-        return Promise.resolve();
-      }
-
-      function showToast(msg='Copied to clipboard'){
-        toast.textContent = msg;
-        toast.classList.add('show');
-        clearTimeout(showToast.t);
-        showToast.t = setTimeout(() => toast.classList.remove('show'), 900);
-      }
-
-      function addRipple(el, e){
-        const rect = el.getBoundingClientRect();
-        const rx = e.clientX - rect.left;
-        const ry = e.clientY - rect.top;
-        el.style.setProperty('--rx', rx + 'px');
-        el.style.setProperty('--ry', ry + 'px');
-        const rip = document.createElement('span');
-        rip.className = 'ripple';
-        el.appendChild(rip);
-        setTimeout(() => rip.remove(), 600);
-      }
-
-      function setHoverLight(el, e){
-        const r = el.getBoundingClientRect();
-        const hx = ((e.clientX - r.left) / r.width) * 100;
-        const hy = ((e.clientY - r.top) / r.height) * 100;
-        el.style.setProperty('--hx', hx + '%');
-        el.style.setProperty('--hy', hy + '%');
-      }
-
-      chips.forEach(el => {
-        el.addEventListener('pointermove', (e) => setHoverLight(el, e));
-        el.addEventListener('click', async (e) => {
-          const text = el.textContent; // HTML entities already decoded by DOM
-          addRipple(el, e);
-          try {
-            await copyText(text);
-            el.setAttribute('data-copied', '1');
-            showToast('Copied: ' + text);
-            setTimeout(() => el.removeAttribute('data-copied'), 600);
-          } catch {
-            showToast('Failed to copy');
+      const copy = async () => {
+        try {
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const ta = document.createElement("textarea");
+            ta.value = text; ta.style.position = "fixed"; ta.style.left = "-9999px";
+            document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove();
           }
-        });
+          setCopied(true);
+          onCopied?.(text);
+          setTimeout(() => setCopied(false), 900);
+        } catch {}
+      };
 
-        // Keyboard support
-        el.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            el.click();
-          }
-        });
-      });
-    })();
+      return (
+        <motion.button
+          type="button"
+          title={`Copy "${text}"`}
+          onClick={copy}
+          onKeyDown={e => ((e.key === "Enter" || e.key === " ") && (e.preventDefault(), copy()))}
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.96 }}
+          transition={{ type: "spring", stiffness: 380, damping: 28 }}
+          className="group relative select-none rounded-full border border-white/10 bg-white/10 px-3.5 py-2 text-sm font-medium shadow-soft outline-none ring-0 focus-visible:ring-2 focus-visible:ring-white/25"
+        >
+          <span className="font-mono">{text}</span>
+          <AnimatePresence>
+            {copied && (
+              <motion.span
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: .18 }}
+                className="absolute -top-2 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-white px-2 py-1 text-[11px] font-semibold text-black shadow-soft"
+              >
+                Copied
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </motion.button>
+      );
+    };
+
+    const Row = ({ name, items, onCopied }) => (
+      <div className="flex flex-col gap-3 rounded-xl p-3 transition-colors hover:bg-white/5 md:flex-row md:items-center md:justify-between">
+        <div className="min-w-0">
+          <div className="truncate text-white/80 font-semibold">{name}</div>
+        </div>
+        <div className="flex flex-wrap gap-2.5">
+          {items.map((it, i) => (
+            <CopyChip key={i} text={it} onCopied={onCopied} />
+          ))}
+        </div>
+      </div>
+    );
+
+    const Toast = ({ text }) => (
+      <AnimatePresence>
+        {text && (
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12 }}
+            transition={{ duration: .2, ease: "easeOut" }}
+            className="fixed bottom-5 left-1/2 -translate-x-1/2 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black shadow-soft"
+            role="status" aria-live="polite"
+          >
+            {text}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    );
+
+    const App = () => {
+      const [query, setQuery] = useState("");
+      const [toast, setToast] = useState("");
+
+      // Filter
+      const filtered = useMemo(() => {
+        if (!query.trim()) return DATA;
+        const q = query.toLowerCase();
+        return DATA.map(sec => ({
+          ...sec,
+          rows: sec.rows.filter(row =>
+            row.name.toLowerCase().includes(q) ||
+            row.items.some(x => x.toLowerCase().includes(q))
+          )
+        })).filter(sec => sec.rows.length > 0);
+      }, [query]);
+
+      // Toast timer
+      useEffect(() => {
+        if (!toast) return;
+        const t = setTimeout(() => setToast(""), 1100);
+        return () => clearTimeout(t);
+      }, [toast]);
+
+      // Count
+      const count = useMemo(() => (
+        DATA.reduce((acc, s) => acc + s.rows.reduce((a, r) => a + r.items.length, 0), 0)
+      ), []);
+
+      const onCopied = (txt) => setToast(`Copied: ${txt}`);
+
+      return (
+        <MotionConfig reducedMotion="user">
+          <div className="min-h-screen">
+            <Header query={query} setQuery={setQuery} count={count} />
+            <main className="mx-auto max-w-6xl px-4 py-6 md:py-10 space-y-6">
+              {filtered.map((sec, si) => (
+                <Section key={si} tag={sec.tag}>
+                  <div className="divide-y divide-white/5">
+                    {sec.rows.map((row, ri) => (
+                      <Row key={ri} name={row.name} items={row.items} onCopied={onCopied} />
+                    ))}
+                  </div>
+                </Section>
+              ))}
+              {filtered.length === 0 && (
+                <div className="text-center text-white/60 py-16">No matches. Try a different search.</div>
+              )}
+            </main>
+            <Toast text={toast} />
+          </div>
+        </MotionConfig>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App />);
   </script>
 </body>
 </html>
