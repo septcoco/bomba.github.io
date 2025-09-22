@@ -2,65 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover"
-  />
-  <meta name="theme-color" content="#fce300" />
-  <title>DEMA ARCHIVE — Unicode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#e03c31" />
+  <title>CLANCY ARCHIVE — Unicode</title>
 
   <style>
     :root {
-      --dema-yellow: #fce300;
-      --dema-yellow-dim: #c8b000;
+      --accent: #e03c31;          /* Late-Clancy red */
+      --accent-2: #ff6357;        /* Lighter red for glow blends */
       --ink: #0a0a0a;
-      --ink-2: #121212;
-      --ink-3: #171717;
-      --paper: #0d0d0f;
-      --stroke: rgba(255, 255, 255, 0.14);
-      --muted: rgba(255, 255, 255, 0.65);
-      --ring: rgba(252, 227, 0, 0.3);
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      --ink-2: #111113;
+      --ink-3: #151518;
+      --stroke: rgba(255,255,255,0.14);
+      --muted: rgba(255,255,255,0.68);
+      --ring: rgba(224, 60, 49, 0.35);
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
     * { box-sizing: border-box; }
     html, body { height: 100%; }
     body {
       margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color: #fff;
       background: var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
     }
 
-    /* Background: scanlines + faint hazard diagonals + grain */
+    /* Background: aurora + scanlines + faint diagonals + grain */
     .bg {
-      position: fixed;
-      inset: 0;
-      z-index: -2;
+      position: fixed; inset: 0; z-index: -3;
       background:
-        radial-gradient(1200px 800px at 10% 10%, #111 0%, transparent 40%),
-        radial-gradient(1000px 700px at 80% 30%, #0f0f14 0%, transparent 40%),
+        radial-gradient(1200px 800px at 12% 12%, #131316 0%, transparent 40%),
+        radial-gradient(1000px 740px at 85% 25%, #0f0f12 0%, transparent 42%),
         linear-gradient(0deg, #0a0a0a, #0a0a0a);
     }
     .bg::before {
       content: "";
       position: absolute; inset: 0;
-      background:
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.045) 0 1px, transparent 1px 3px);
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(255,255,255,0.045) 0 1px,
+        transparent 1px 3px
+      );
       mix-blend-mode: overlay;
-      opacity: 0.25;
+      opacity: 0.24;
       pointer-events: none;
     }
     .bg::after {
       content: "";
       position: absolute; inset: -20%;
-      background:
-        repeating-linear-gradient(45deg,
-          rgba(252, 227, 0, 0.06) 0 12px,
-          rgba(0, 0, 0, 0.28) 12px 24px);
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(224, 60, 49, 0.06) 0 12px,
+        rgba(0, 0, 0, 0.28) 12px 24px
+      );
       opacity: 0.25;
       transform: rotate(-2deg);
       filter: blur(4px);
@@ -68,8 +66,7 @@
     }
     .grain {
       position: fixed; inset: -40%;
-      z-index: -1;
-      pointer-events: none;
+      z-index: -2; pointer-events: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
       background-size: 200px 200px;
       mix-blend-mode: soft-light;
@@ -79,224 +76,125 @@
 
     /* Optional tape corners (use your assets if present) */
     .tape {
-      position: fixed;
-      width: 220px;
-      opacity: 0.8;
+      position: fixed; width: 220px; opacity: 0.85;
       filter: contrast(1) saturate(0.9);
-      z-index: 5;
-      pointer-events: none;
-      user-select: none;
+      z-index: 5; pointer-events: none; user-select: none;
     }
 
     /* Frame + header */
-    .shell {
-      max-width: 980px;
-      margin: 64px auto 80px;
-      padding: 0 22px;
-    }
-
-    .mast {
-      position: relative;
-      display: grid;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-    .mast .titleRow {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
+    .shell { max-width: 980px; margin: 64px auto 86px; padding: 0 22px; }
+    .mast { position: relative; display: grid; gap: 12px; margin-bottom: 16px; }
+    .titleRow { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 
     .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #0b0b0b;
-      background: var(--dema-yellow);
-      border: 1px solid #0b0b0b;
-      border-radius: 999px;
-      box-shadow: var(--shadow);
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 12px; font-size: 12px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #0b0b0b; background: var(--accent);
+      border: 1px solid #0b0b0b; border-radius: 999px; box-shadow: var(--shadow);
       user-select: none;
     }
     .title {
       font-size: clamp(18px, 2.2vw, 26px);
-      font-weight: 800;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-      color: #fff;
-      text-shadow: 0 1px 0 #000;
+      font-weight: 800; letter-spacing: .02em; text-transform: uppercase;
+      color: #fff; text-shadow: 0 1px 0 #000;
     }
-    .subtitle {
-      color: var(--muted);
-      font-size: 13px;
-    }
+    .subtitle { color: var(--muted); font-size: 13px; }
 
-    .searchRow {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .search {
-      flex: 1 1 360px;
-      position: relative;
-    }
+    .searchRow { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .search { flex: 1 1 360px; position: relative; }
     .search input {
-      width: 100%;
-      background: #0f0f12;
-      color: #fff;
-      border: 1px solid var(--stroke);
-      border-radius: 10px;
-      padding: 10px 36px 10px 12px;
-      outline: none;
+      width: 100%; background: #0f0f12; color: #fff;
+      border: 1px solid var(--stroke); border-radius: 10px;
+      padding: 10px 36px 10px 12px; outline: none;
       transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
-      box-shadow: inset 0 0 0 1px rgba(252, 227, 0, 0);
+      box-shadow: inset 0 0 0 1px rgba(224,60,49,0);
     }
     .search input::placeholder { color: rgba(255,255,255,0.5) }
     .search input:focus {
-      border-color: var(--dema-yellow);
+      border-color: var(--accent);
       box-shadow: 0 0 0 3px var(--ring);
       background: #111116;
     }
-    .search .icon {
-      position: absolute;
-      right: 10px; top: 50%;
-      transform: translateY(-50%);
-      opacity: 0.75;
-    }
+    .search .icon { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); opacity: .75; }
 
     /* Section card */
     .section {
-      position: relative;
-      background: #0b0b0d;
-      border: 1px solid var(--stroke);
-      border-radius: 14px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      margin-top: 18px;
+      position: relative; background: #0b0b0d;
+      border: 1px solid var(--stroke); border-radius: 14px;
+      box-shadow: var(--shadow); overflow: hidden; margin-top: 18px;
     }
     .section .hdr {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
       padding: 12px 14px;
       background:
-        linear-gradient(180deg, rgba(252, 227, 0, 0.08), rgba(252, 227, 0, 0) 60%),
+        linear-gradient(180deg, rgba(224,60,49,0.08), rgba(224,60,49,0) 60%),
         linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
       border-bottom: 1px solid var(--stroke);
     }
-    .section .legend {
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      font-size: 12px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
+    .legend {
+      display: inline-flex; gap: 8px; align-items: center;
+      font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
     }
     .legend .stamp {
-      padding: 2px 8px;
-      background: var(--dema-yellow);
-      color: #0b0b0b;
-      border: 1px solid #0b0b0b;
-      border-radius: 6px;
-      font-weight: 800;
+      padding: 2px 8px; background: var(--accent); color: #0b0b0b;
+      border: 1px solid #0b0b0b; border-radius: 6px; font-weight: 800;
     }
 
     /* Rows */
     .rows { padding: 8px 8px 10px; }
     .row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 14px;
-      align-items: center;
-      padding: 12px 8px 12px 12px;
-      border-radius: 10px;
-      transition: background 160ms ease, transform 180ms ease;
+      display: grid; grid-template-columns: 1fr auto; gap: 14px;
+      align-items: center; padding: 12px 8px 12px 12px;
+      border-radius: 10px; transition: background 160ms ease, transform 180ms ease;
     }
     .row:hover { background: rgba(255,255,255,0.04); transform: translateY(-1px) }
     .name {
-      min-width: 0;
-      font-weight: 700;
-      color: rgba(255,255,255,0.9);
-      letter-spacing: 0.01em;
-      word-break: break-word;
+      min-width: 0; font-weight: 700; color: rgba(255,255,255,0.9);
+      letter-spacing: .01em; word-break: break-word;
     }
-    .chips {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-self: end;
-    }
+    .chips { display: flex; gap: 8px; flex-wrap: wrap; justify-self: end; }
 
-    /* Copy chip (glitchy) */
+    /* Copy chip (glitch) */
     .copy {
-      --glow: rgba(252, 227, 0, 0.18);
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 40px;
-      padding: 8px 11px;
-      border: 1px solid var(--stroke);
-      border-radius: 999px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-      color: #fff;
-      cursor: pointer;
-      user-select: none;
+      --glow: rgba(224, 60, 49, 0.18);
+      position: relative; display: inline-flex; align-items: center; justify-content: center;
+      min-width: 40px; padding: 8px 11px; border: 1px solid var(--stroke); border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      color: #fff; cursor: pointer; user-select: none;
       transition: transform 120ms ease, border-color 160ms ease, box-shadow 160ms ease;
       box-shadow: 0 0 0 0 var(--glow), 0 6px 18px rgba(0,0,0,0.25);
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
       font-size: 14px;
     }
-    .copy:hover { transform: translateY(-1px); border-color: var(--dema-yellow) }
+    .copy:hover { transform: translateY(-1px); border-color: var(--accent) }
     .copy:active { transform: translateY(0) scale(0.98) }
     .copy:focus-visible {
-      outline: none;
-      box-shadow: 0 0 0 3px var(--ring), 0 6px 18px rgba(0,0,0,0.25);
-      border-color: var(--dema-yellow);
+      outline: none; box-shadow: 0 0 0 3px var(--ring), 0 6px 18px rgba(0,0,0,0.25);
+      border-color: var(--accent);
     }
     /* Glitch layer */
     .copy::before, .copy::after {
       content: attr(data-text);
-      position: absolute;
-      inset: 0;
-      display: grid; place-items: center;
-      opacity: 0;
-      pointer-events: none;
-      mix-blend-mode: screen;
-      text-shadow:
-        -1px 0 var(--dema-yellow),
-        1px 0 #ff004c;
+      position: absolute; inset: 0; display: grid; place-items: center;
+      opacity: 0; pointer-events: none; mix-blend-mode: screen;
+      text-shadow: -1px 0 var(--accent), 1px 0 #00e5ff; /* red + cyan split */
       clip-path: inset(0 0 50% 0);
       transition: opacity 140ms ease;
       font: inherit;
     }
     .copy::after {
       clip-path: inset(50% 0 0 0);
-      text-shadow:
-        1px 0 var(--dema-yellow),
-        -1px 0 #00e5ff;
+      text-shadow: 1px 0 var(--accent-2), -1px 0 #00e5ff;
     }
-    .copy:hover::before, .copy:hover::after { opacity: 0.25 }
+    .copy:hover::before, .copy:hover::after { opacity: 0.22 }
 
     /* Ripple + tooltip */
     .copy .ripple {
-      position: absolute;
-      left: var(--rx); top: var(--ry);
-      width: 1px; height: 1px;
-      transform: translate(-50%, -50%);
-      background: radial-gradient(circle, rgba(252, 227, 0, 0.45) 0%, rgba(252, 227, 0, 0) 65%);
-      animation: ripple .6s ease-out forwards;
-      filter: blur(.15px);
-      pointer-events: none;
+      position: absolute; left: var(--rx); top: var(--ry);
+      width: 1px; height: 1px; transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(224,60,49,0.45) 0%, rgba(224,60,49,0) 65%);
+      animation: ripple .6s ease-out forwards; filter: blur(.15px); pointer-events: none;
     }
     @keyframes ripple {
       0% { width: 0; height: 0; opacity: .8 }
@@ -304,53 +202,40 @@
     }
     .copy[data-copied="1"]::after {
       content: "COPIED";
-      position: absolute;
-      top: -8px; left: 50%;
-      transform: translate(-50%, -100%);
-      background: var(--dema-yellow);
-      color: #0a0a0a;
-      border: 1px solid #0a0a0a;
-      padding: 2px 6px;
-      font-size: 11px;
-      font-weight: 800;
-      border-radius: 6px;
-      box-shadow: var(--shadow);
-      text-shadow: none;
-      opacity: 1;
-      clip-path: none;
+      position: absolute; top: -8px; left: 50%; transform: translate(-50%, -100%);
+      background: var(--accent); color: #0a0a0a; border: 1px solid #0a0a0a;
+      padding: 2px 6px; font-size: 11px; font-weight: 800; border-radius: 6px; box-shadow: var(--shadow);
+      text-shadow: none; opacity: 1; clip-path: none;
     }
 
-    /* Scanner line inside each section */
+    /* Scanner overlay (smooth, seamless loop with fade) */
     .scanner {
-      position: absolute;
-      left: 0; right: 0; top: -100%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--dema-yellow), transparent);
-      opacity: .35;
-      animation: scan 3.8s linear infinite;
+      position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen;
+      background:
+        linear-gradient(
+          to bottom,
+          transparent 0%,
+          rgba(224,60,49,0.00) 42%,
+          rgba(224,60,49,0.28) 50%,
+          rgba(224,60,49,0.00) 58%,
+          transparent 100%
+        );
+      background-size: 100% 220%;
+      animation: scanMove 5.2s linear infinite;
+      opacity: .22;
     }
-    @keyframes scan {
-      0% { top: -100% }
-      100% { top: 200% }
+    @keyframes scanMove {
+      0% { background-position-y: 0% }
+      100% { background-position-y: 200% }
     }
 
     /* Toast */
     .toast {
-      position: fixed;
-      left: 50%; bottom: max(18px, env(safe-area-inset-bottom));
+      position: fixed; left: 50%; bottom: max(18px, env(safe-area-inset-bottom));
       transform: translate(-50%, 18px);
-      background: var(--dema-yellow);
-      color: #0a0a0a;
-      border: 2px solid #0a0a0a;
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      box-shadow: var(--shadow);
-      opacity: 0;
-      transition: transform 200ms ease, opacity 200ms ease;
-      z-index: 50;
+      background: var(--accent); color: #0a0a0a; border: 2px solid #0a0a0a;
+      padding: 10px 14px; border-radius: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase;
+      box-shadow: var(--shadow); opacity: 0; transition: transform 200ms ease, opacity 200ms ease; z-index: 50;
     }
     .toast.show { opacity: 1; transform: translate(-50%, 0) }
 
@@ -362,7 +247,7 @@
   </style>
 </head>
 <body>
-  <!-- Optional tape corners (use your assets) -->
+  <!-- Optional tape corners (same paths as your menu) -->
   <img src="../img/tape/Tape (3).webp" class="tape" style="top: 8px; left: 8px; transform: rotate(-6deg);" alt="" />
   <img src="../img/tape/Tape (2).webp" class="tape" style="bottom: 8px; right: 8px; transform: rotate(6deg);" alt="" />
 
@@ -372,18 +257,17 @@
   <div class="shell">
     <header class="mast">
       <div class="titleRow">
-        <span class="badge">DEMA</span>
+        <span class="badge">CLANCY</span>
         <div class="title">Unicode Archive</div>
       </div>
       <div class="searchRow">
-        <div class="subtitle">Directive: East Is Up · Secure Terminal</div>
+        <div class="subtitle">Directive: Late‑Clancy Transmission · Secure Terminal</div>
         <div class="search">
           <input id="search" type="search" placeholder="Scan by name or symbol…" spellcheck="false" />
           <div class="icon" aria-hidden="true">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-80" style="color: #fff;">
-              <circle cx="11" cy="11" r="8"></circle>
-              <path d="m21 21-4.3-4.3"></path>
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#fff;opacity:.85">
+              <circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path>
             </svg>
           </div>
         </div>
@@ -396,41 +280,29 @@
   <div class="toast" id="toast" role="status" aria-live="polite">TRANSMISSION COPIED</div>
 
   <script>
-    // Data (same content you shared)
+    // Data
     const DATA = [
-      {
-        tag: "Logos",
-        rows: [
-          { name: "RAB + Vessel", items: ["⊬"] },
-          { name: "Blurryface", items: ["|-/"] },
-          { name: "Trench", items: ["||-//"] },
-          { name: "Scaled & Icy", items: ["ψ", "Ψ"] },
-          { name: "Clancy", items: ["(|-/)"] },
-          { name: "DEMA", items: ["D⋲MΛ"] },
-          { name: "TOPxMM", items: ["●●×○○○○"] },
-        ]
-      },
-      {
-        tag: "Letters",
-        rows: [
-          { name: "O, o", items: ["Ø", "ø"] },
-        ]
-      },
-      {
-        tag: "Characters",
-        rows: [
-          { name: "Ned", items: ["<{•.•}>"] },
-          { name: "Vulture", items: ["//^<•}^\\", "☬", "𓅐"] },
-        ]
-      },
-      {
-        tag: "Miscellaneous",
-        rows: [
-          { name: "Jumpsuit Medallion", items: ["✺"] },
-          { name: "Tyler's Tattoos", items: ["·|i|· Φ i✝! ] ·[", "·|i|·", "Φ", "i✝!", "] ·["] },
-          { name: "FPE", items: ["F̶P̶E̶"] },
-        ]
-      }
+      { tag: "Logos", rows: [
+        { name: "RAB + Vessel", items: ["⊬"] },
+        { name: "Blurryface", items: ["|-/"] },
+        { name: "Trench", items: ["||-//"] },
+        { name: "Scaled & Icy", items: ["ψ", "Ψ"] },
+        { name: "Clancy", items: ["(|-/)"] },
+        { name: "DEMA", items: ["D⋲MΛ"] },
+        { name: "TOPxMM", items: ["●●×○○○○"] },
+      ]},
+      { tag: "Letters", rows: [
+        { name: "O, o", items: ["Ø", "ø"] },
+      ]},
+      { tag: "Characters", rows: [
+        { name: "Ned", items: ["<{•.•}>"] },
+        { name: "Vulture", items: ["//^<•}^\\", "☬", "𓅐"] },
+      ]},
+      { tag: "Miscellaneous", rows: [
+        { name: "Jumpsuit Medallion", items: ["✺"] },
+        { name: "Tyler's Tattoos", items: ["·|i|· Φ i✝! ] ·[", "·|i|·", "Φ", "i✝!", "] ·["] },
+        { name: "FPE", items: ["F̶P̶E̶"] },
+      ]}
     ];
 
     const app = document.getElementById('app');
@@ -484,7 +356,7 @@
           el('div', { class: 'scanner', 'aria-hidden': 'true' }),
           el('div', { class: 'hdr' }, [
             el('div', { class: 'legend' }, [
-              el('span', { class: 'stamp' }, [document.createTextNode('DEMA')]),
+              el('span', { class: 'stamp' }, [document.createTextNode('CLANCY')]),
               document.createTextNode(' ' + section.tag.toUpperCase())
             ])
           ]),
@@ -500,10 +372,7 @@
 
           row.items.forEach(text => {
             const chip = el('button', {
-              class: 'copy',
-              type: 'button',
-              'data-text': text,
-              title: `Copy "${text}"`
+              class: 'copy', type: 'button', 'data-text': text, title: `Copy "${text}"`
             }, [document.createTextNode(text)]);
 
             chip.addEventListener('pointermove', (e) => {
@@ -512,7 +381,7 @@
               const dx = (e.clientX - r.left) / r.width - 0.5;
               const dy = (e.clientY - r.top) / r.height - 0.5;
               const glow = Math.min(0.28, Math.hypot(dx, dy) * 0.6 + 0.18);
-              chip.style.boxShadow = `0 0 0 0 rgba(252,227,0,${glow}), 0 6px 18px rgba(0,0,0,0.25)`;
+              chip.style.boxShadow = `0 0 0 0 rgba(224,60,49,${glow}), 0 6px 18px rgba(0,0,0,0.25)`;
             });
 
             chip.addEventListener('click', async (e) => {
@@ -528,10 +397,7 @@
             });
 
             chip.addEventListener('keydown', (e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                chip.click();
-              }
+              if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); chip.click(); }
             });
 
             chips.appendChild(chip);
@@ -561,11 +427,10 @@
     // Initial render
     render(DATA);
 
-    // Search handler
+    // Search
     search.addEventListener('input', (e) => {
       const q = e.target.value.trim();
-      const d = filterData(q);
-      render(d);
+      render(filterData(q));
     });
   </script>
 </body>
