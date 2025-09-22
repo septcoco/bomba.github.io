@@ -1,65 +1,402 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Twenty One Pilots Unicode</title>
-
-  <!-- Tailwind CSS (CDN) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            bg: "#0b0b0f",
-            card: "rgba(255,255,255,0.06)",
-            stroke: "rgba(255,255,255,0.12)",
-            ring: "rgba(255,255,255,0.25)",
-          },
-          boxShadow: {
-            soft: "0 10px 30px rgba(0,0,0,.35)",
-          },
-        }
-      }
-    }
-  </script>
-
-  <!-- React / ReactDOM / Framer Motion (UMD) + Babel -->
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/framer-motion@11.0.8/dist/framer-motion.umd.js" crossorigin></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+  <meta name="theme-color" content="#fce300" />
+  <title>DEMA ARCHIVE — Unicode</title>
 
   <style>
-    html, body { height: 100% }
-    body { background: #0b0b0f; color: #fff; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale }
-    /* Subtle grain */
+    :root {
+      --dema-yellow: #fce300;
+      --dema-yellow-dim: #c8b000;
+      --ink: #0a0a0a;
+      --ink-2: #121212;
+      --ink-3: #171717;
+      --paper: #0d0d0f;
+      --stroke: rgba(255, 255, 255, 0.14);
+      --muted: rgba(255, 255, 255, 0.65);
+      --ring: rgba(252, 227, 0, 0.3);
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: #fff;
+      background: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Background: scanlines + faint hazard diagonals + grain */
+    .bg {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(1200px 800px at 10% 10%, #111 0%, transparent 40%),
+        radial-gradient(1000px 700px at 80% 30%, #0f0f14 0%, transparent 40%),
+        linear-gradient(0deg, #0a0a0a, #0a0a0a);
+    }
+    .bg::before {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.045) 0 1px, transparent 1px 3px);
+      mix-blend-mode: overlay;
+      opacity: 0.25;
+      pointer-events: none;
+    }
+    .bg::after {
+      content: "";
+      position: absolute; inset: -20%;
+      background:
+        repeating-linear-gradient(45deg,
+          rgba(252, 227, 0, 0.06) 0 12px,
+          rgba(0, 0, 0, 0.28) 12px 24px);
+      opacity: 0.25;
+      transform: rotate(-2deg);
+      filter: blur(4px);
+      pointer-events: none;
+    }
     .grain {
-      position: fixed; inset: -50%;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
-      background-size: 180px 180px; mix-blend-mode: soft-light; pointer-events: none; z-index: -1;
+      position: fixed; inset: -40%;
+      z-index: -1;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.06'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+      mix-blend-mode: soft-light;
       animation: grainMove 18s linear infinite;
     }
-    @keyframes grainMove { to { transform: translate3d(-10%, -10%, 0) } }
+    @keyframes grainMove { to { transform: translate3d(-10%, -8%, 0) } }
+
+    /* Optional tape corners (use your assets if present) */
+    .tape {
+      position: fixed;
+      width: 220px;
+      opacity: 0.8;
+      filter: contrast(1) saturate(0.9);
+      z-index: 5;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Frame + header */
+    .shell {
+      max-width: 980px;
+      margin: 64px auto 80px;
+      padding: 0 22px;
+    }
+
+    .mast {
+      position: relative;
+      display: grid;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .mast .titleRow {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #0b0b0b;
+      background: var(--dema-yellow);
+      border: 1px solid #0b0b0b;
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+      user-select: none;
+    }
+    .title {
+      font-size: clamp(18px, 2.2vw, 26px);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow: 0 1px 0 #000;
+    }
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .searchRow {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .search {
+      flex: 1 1 360px;
+      position: relative;
+    }
+    .search input {
+      width: 100%;
+      background: #0f0f12;
+      color: #fff;
+      border: 1px solid var(--stroke);
+      border-radius: 10px;
+      padding: 10px 36px 10px 12px;
+      outline: none;
+      transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+      box-shadow: inset 0 0 0 1px rgba(252, 227, 0, 0);
+    }
+    .search input::placeholder { color: rgba(255,255,255,0.5) }
+    .search input:focus {
+      border-color: var(--dema-yellow);
+      box-shadow: 0 0 0 3px var(--ring);
+      background: #111116;
+    }
+    .search .icon {
+      position: absolute;
+      right: 10px; top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.75;
+    }
+
+    /* Section card */
+    .section {
+      position: relative;
+      background: #0b0b0d;
+      border: 1px solid var(--stroke);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-top: 18px;
+    }
+    .section .hdr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      background:
+        linear-gradient(180deg, rgba(252, 227, 0, 0.08), rgba(252, 227, 0, 0) 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0));
+      border-bottom: 1px solid var(--stroke);
+    }
+    .section .legend {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .legend .stamp {
+      padding: 2px 8px;
+      background: var(--dema-yellow);
+      color: #0b0b0b;
+      border: 1px solid #0b0b0b;
+      border-radius: 6px;
+      font-weight: 800;
+    }
+
+    /* Rows */
+    .rows { padding: 8px 8px 10px; }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 12px 8px 12px 12px;
+      border-radius: 10px;
+      transition: background 160ms ease, transform 180ms ease;
+    }
+    .row:hover { background: rgba(255,255,255,0.04); transform: translateY(-1px) }
+    .name {
+      min-width: 0;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.01em;
+      word-break: break-word;
+    }
+    .chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-self: end;
+    }
+
+    /* Copy chip (glitchy) */
+    .copy {
+      --glow: rgba(252, 227, 0, 0.18);
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      padding: 8px 11px;
+      border: 1px solid var(--stroke);
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      color: #fff;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 120ms ease, border-color 160ms ease, box-shadow 160ms ease;
+      box-shadow: 0 0 0 0 var(--glow), 0 6px 18px rgba(0,0,0,0.25);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 14px;
+    }
+    .copy:hover { transform: translateY(-1px); border-color: var(--dema-yellow) }
+    .copy:active { transform: translateY(0) scale(0.98) }
+    .copy:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px var(--ring), 0 6px 18px rgba(0,0,0,0.25);
+      border-color: var(--dema-yellow);
+    }
+    /* Glitch layer */
+    .copy::before, .copy::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      display: grid; place-items: center;
+      opacity: 0;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      text-shadow:
+        -1px 0 var(--dema-yellow),
+        1px 0 #ff004c;
+      clip-path: inset(0 0 50% 0);
+      transition: opacity 140ms ease;
+      font: inherit;
+    }
+    .copy::after {
+      clip-path: inset(50% 0 0 0);
+      text-shadow:
+        1px 0 var(--dema-yellow),
+        -1px 0 #00e5ff;
+    }
+    .copy:hover::before, .copy:hover::after { opacity: 0.25 }
+
+    /* Ripple + tooltip */
+    .copy .ripple {
+      position: absolute;
+      left: var(--rx); top: var(--ry);
+      width: 1px; height: 1px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(252, 227, 0, 0.45) 0%, rgba(252, 227, 0, 0) 65%);
+      animation: ripple .6s ease-out forwards;
+      filter: blur(.15px);
+      pointer-events: none;
+    }
+    @keyframes ripple {
+      0% { width: 0; height: 0; opacity: .8 }
+      100% { width: 240px; height: 240px; opacity: 0 }
+    }
+    .copy[data-copied="1"]::after {
+      content: "COPIED";
+      position: absolute;
+      top: -8px; left: 50%;
+      transform: translate(-50%, -100%);
+      background: var(--dema-yellow);
+      color: #0a0a0a;
+      border: 1px solid #0a0a0a;
+      padding: 2px 6px;
+      font-size: 11px;
+      font-weight: 800;
+      border-radius: 6px;
+      box-shadow: var(--shadow);
+      text-shadow: none;
+      opacity: 1;
+      clip-path: none;
+    }
+
+    /* Scanner line inside each section */
+    .scanner {
+      position: absolute;
+      left: 0; right: 0; top: -100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--dema-yellow), transparent);
+      opacity: .35;
+      animation: scan 3.8s linear infinite;
+    }
+    @keyframes scan {
+      0% { top: -100% }
+      100% { top: 200% }
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      left: 50%; bottom: max(18px, env(safe-area-inset-bottom));
+      transform: translate(-50%, 18px);
+      background: var(--dema-yellow);
+      color: #0a0a0a;
+      border: 2px solid #0a0a0a;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transition: transform 200ms ease, opacity 200ms ease;
+      z-index: 50;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0) }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .grain, .scanner, .copy .ripple { animation: none !important }
+      .copy::before, .copy::after { display: none !important }
+    }
   </style>
 </head>
 <body>
-  <!-- Aurora background -->
-  <div class="fixed inset-0 -z-10 pointer-events-none">
-    <div class="absolute inset-0 bg-[radial-gradient(1200px_800px_at_10%_10%,#1f2937_0%,transparent_45%)]"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(900px_600px_at_90%_20%,#0ea5e9_0%,transparent_35%)] opacity-60"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(1000px_700px_at_40%_90%,#f43f5e_0%,transparent_35%)] opacity-40"></div>
+  <!-- Optional tape corners (use your assets) -->
+  <img src="../img/tape/Tape (3).webp" class="tape" style="top: 8px; left: 8px; transform: rotate(-6deg);" alt="" />
+  <img src="../img/tape/Tape (2).webp" class="tape" style="bottom: 8px; right: 8px; transform: rotate(6deg);" alt="" />
+
+  <div class="bg"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="shell">
+    <header class="mast">
+      <div class="titleRow">
+        <span class="badge">DEMA</span>
+        <div class="title">Unicode Archive</div>
+      </div>
+      <div class="searchRow">
+        <div class="subtitle">Directive: East Is Up · Secure Terminal</div>
+        <div class="search">
+          <input id="search" type="search" placeholder="Scan by name or symbol…" spellcheck="false" />
+          <div class="icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="opacity-80" style="color: #fff;">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="app" aria-live="polite" aria-busy="false"></main>
   </div>
-  <div class="grain"></div>
 
-  <div id="root"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite">TRANSMISSION COPIED</div>
 
-  <script type="text/babel">
-    const { useState, useMemo, useEffect } = React;
-    const { motion, AnimatePresence, MotionConfig } = window.framerMotion;
-
-    // Data
+  <script>
+    // Data (same content you shared)
     const DATA = [
       {
         tag: "Logos",
@@ -96,190 +433,140 @@
       }
     ];
 
-    const Header = ({ query, setQuery, count }) => (
-      <div className="sticky top-0 z-10 backdrop-blur supports-[backdrop-filter]:bg-bg/60 bg-bg/80 border-b border-white/10">
-        <div className="mx-auto max-w-6xl px-4 py-4">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <div className="flex items-center gap-3">
-              <div className="h-9 w-9 rounded-xl bg-white/10 grid place-items-center ring-1 ring-white/15 shadow-soft">
-                <span className="text-lg">⌘</span>
-              </div>
-              <div>
-                <h1 className="text-xl md:text-2xl font-semibold tracking-tight">Twenty One Pilots Unicode</h1>
-                <p className="text-white/60 text-sm">{count} entries</p>
-              </div>
-            </div>
-            <div className="w-full md:w-[420px]">
-              <div className="relative">
-                <input
-                  value={query}
-                  onChange={e => setQuery(e.target.value)}
-                  placeholder="Search by name or symbol…"
-                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-2.5 pr-10 outline-none text-sm placeholder:text-white/50 focus:ring-2 focus:ring-white/20"
-                />
-                <div className="absolute right-2 top-1/2 -translate-y-1/2 text-white/40">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                       strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-80">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.3-4.3"></path>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    const app = document.getElementById('app');
+    const search = document.getElementById('search');
+    const toast = document.getElementById('toast');
 
-    const Section = ({ tag, children }) => (
-      <motion.section
-        initial={{ opacity: 0, y: 8 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: .4, ease: "easeOut" }}
-        className="rounded-2xl border border-white/10 bg-white/5 shadow-soft px-4 sm:px-5 py-5"
-      >
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-sm uppercase tracking-[0.16em] text-white/60">{tag}</h2>
-        </div>
-        {children}
-      </motion.section>
-    );
+    function el(tag, attrs = {}, children = []) {
+      const n = document.createElement(tag);
+      Object.entries(attrs).forEach(([k,v]) => {
+        if (k === 'class') n.className = v;
+        else if (k === 'html') n.innerHTML = v;
+        else if (k.startsWith('data-')) n.setAttribute(k, v);
+        else if (k === 'aria') Object.entries(v).forEach(([ak,av]) => n.setAttribute('aria-' + ak, av));
+        else n.setAttribute(k, v);
+      });
+      children.forEach(c => n.appendChild(c));
+      return n;
+    }
 
-    const CopyChip = ({ text, onCopied }) => {
-      const [copied, setCopied] = useState(false);
+    function showToast(msg) {
+      toast.textContent = msg || "TRANSMISSION COPIED";
+      toast.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => toast.classList.remove('show'), 1200);
+    }
 
-      const copy = async () => {
-        try {
-          if (navigator.clipboard?.writeText) {
-            await navigator.clipboard.writeText(text);
-          } else {
-            const ta = document.createElement("textarea");
-            ta.value = text; ta.style.position = "fixed"; ta.style.left = "-9999px";
-            document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove();
-          }
-          setCopied(true);
-          onCopied?.(text);
-          setTimeout(() => setCopied(false), 900);
-        } catch {}
-      };
+    function addRipple(el, e) {
+      const r = el.getBoundingClientRect();
+      const rx = e.clientX - r.left;
+      const ry = e.clientY - r.top;
+      el.style.setProperty('--rx', rx + 'px');
+      el.style.setProperty('--ry', ry + 'px');
+      const s = document.createElement('span');
+      s.className = 'ripple';
+      el.appendChild(s);
+      setTimeout(() => s.remove(), 600);
+    }
 
-      return (
-        <motion.button
-          type="button"
-          title={`Copy "${text}"`}
-          onClick={copy}
-          onKeyDown={e => ((e.key === "Enter" || e.key === " ") && (e.preventDefault(), copy()))}
-          whileHover={{ scale: 1.04 }}
-          whileTap={{ scale: 0.96 }}
-          transition={{ type: "spring", stiffness: 380, damping: 28 }}
-          className="group relative select-none rounded-full border border-white/10 bg-white/10 px-3.5 py-2 text-sm font-medium shadow-soft outline-none ring-0 focus-visible:ring-2 focus-visible:ring-white/25"
-        >
-          <span className="font-mono">{text}</span>
-          <AnimatePresence>
-            {copied && (
-              <motion.span
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: .18 }}
-                className="absolute -top-2 left-1/2 -translate-x-1/2 -translate-y-full rounded-md bg-white px-2 py-1 text-[11px] font-semibold text-black shadow-soft"
-              >
-                Copied
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </motion.button>
-      );
-    };
+    async function copyText(text) {
+      if (navigator.clipboard?.writeText) return navigator.clipboard.writeText(text);
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position = 'fixed'; ta.style.left = '-9999px'; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy'); ta.remove();
+      return Promise.resolve();
+    }
 
-    const Row = ({ name, items, onCopied }) => (
-      <div className="flex flex-col gap-3 rounded-xl p-3 transition-colors hover:bg-white/5 md:flex-row md:items-center md:justify-between">
-        <div className="min-w-0">
-          <div className="truncate text-white/80 font-semibold">{name}</div>
-        </div>
-        <div className="flex flex-wrap gap-2.5">
-          {items.map((it, i) => (
-            <CopyChip key={i} text={it} onCopied={onCopied} />
-          ))}
-        </div>
-      </div>
-    );
+    function render(data) {
+      app.innerHTML = '';
+      data.forEach(section => {
+        const sec = el('section', { class: 'section' }, [
+          el('div', { class: 'scanner', 'aria-hidden': 'true' }),
+          el('div', { class: 'hdr' }, [
+            el('div', { class: 'legend' }, [
+              el('span', { class: 'stamp' }, [document.createTextNode('DEMA')]),
+              document.createTextNode(' ' + section.tag.toUpperCase())
+            ])
+          ]),
+          el('div', { class: 'rows' })
+        ]);
 
-    const Toast = ({ text }) => (
-      <AnimatePresence>
-        {text && (
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 12 }}
-            transition={{ duration: .2, ease: "easeOut" }}
-            className="fixed bottom-5 left-1/2 -translate-x-1/2 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-black shadow-soft"
-            role="status" aria-live="polite"
-          >
-            {text}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    );
+        const rowsWrap = sec.querySelector('.rows');
 
-    const App = () => {
-      const [query, setQuery] = useState("");
-      const [toast, setToast] = useState("");
+        section.rows.forEach(row => {
+          const rowEl = el('div', { class: 'row' });
+          const name = el('div', { class: 'name' }, [document.createTextNode(row.name)]);
+          const chips = el('div', { class: 'chips' });
 
-      // Filter
-      const filtered = useMemo(() => {
-        if (!query.trim()) return DATA;
-        const q = query.toLowerCase();
-        return DATA.map(sec => ({
-          ...sec,
-          rows: sec.rows.filter(row =>
-            row.name.toLowerCase().includes(q) ||
-            row.items.some(x => x.toLowerCase().includes(q))
-          )
-        })).filter(sec => sec.rows.length > 0);
-      }, [query]);
+          row.items.forEach(text => {
+            const chip = el('button', {
+              class: 'copy',
+              type: 'button',
+              'data-text': text,
+              title: `Copy "${text}"`
+            }, [document.createTextNode(text)]);
 
-      // Toast timer
-      useEffect(() => {
-        if (!toast) return;
-        const t = setTimeout(() => setToast(""), 1100);
-        return () => clearTimeout(t);
-      }, [toast]);
+            chip.addEventListener('pointermove', (e) => {
+              // subtle glow follows pointer
+              const r = chip.getBoundingClientRect();
+              const dx = (e.clientX - r.left) / r.width - 0.5;
+              const dy = (e.clientY - r.top) / r.height - 0.5;
+              const glow = Math.min(0.28, Math.hypot(dx, dy) * 0.6 + 0.18);
+              chip.style.boxShadow = `0 0 0 0 rgba(252,227,0,${glow}), 0 6px 18px rgba(0,0,0,0.25)`;
+            });
 
-      // Count
-      const count = useMemo(() => (
-        DATA.reduce((acc, s) => acc + s.rows.reduce((a, r) => a + r.items.length, 0), 0)
-      ), []);
+            chip.addEventListener('click', async (e) => {
+              addRipple(chip, e);
+              try {
+                await copyText(text);
+                chip.setAttribute('data-copied', '1');
+                showToast('TRANSMISSION COPIED: ' + text);
+                setTimeout(() => chip.removeAttribute('data-copied'), 700);
+              } catch {
+                showToast('COPY FAILED');
+              }
+            });
 
-      const onCopied = (txt) => setToast(`Copied: ${txt}`);
+            chip.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                chip.click();
+              }
+            });
 
-      return (
-        <MotionConfig reducedMotion="user">
-          <div className="min-h-screen">
-            <Header query={query} setQuery={setQuery} count={count} />
-            <main className="mx-auto max-w-6xl px-4 py-6 md:py-10 space-y-6">
-              {filtered.map((sec, si) => (
-                <Section key={si} tag={sec.tag}>
-                  <div className="divide-y divide-white/5">
-                    {sec.rows.map((row, ri) => (
-                      <Row key={ri} name={row.name} items={row.items} onCopied={onCopied} />
-                    ))}
-                  </div>
-                </Section>
-              ))}
-              {filtered.length === 0 && (
-                <div className="text-center text-white/60 py-16">No matches. Try a different search.</div>
-              )}
-            </main>
-            <Toast text={toast} />
-          </div>
-        </MotionConfig>
-      );
-    };
+            chips.appendChild(chip);
+          });
 
-    const root = ReactDOM.createRoot(document.getElementById("root"));
-    root.render(<App />);
+          rowEl.appendChild(name);
+          rowEl.appendChild(chips);
+          rowsWrap.appendChild(rowEl);
+        });
+
+        app.appendChild(sec);
+      });
+    }
+
+    function filterData(q) {
+      if (!q) return DATA;
+      const n = q.toLowerCase();
+      return DATA.map(s => ({
+        ...s,
+        rows: s.rows.filter(r =>
+          r.name.toLowerCase().includes(n) ||
+          r.items.some(it => it.toLowerCase().includes(n))
+        )
+      })).filter(s => s.rows.length > 0);
+    }
+
+    // Initial render
+    render(DATA);
+
+    // Search handler
+    search.addEventListener('input', (e) => {
+      const q = e.target.value.trim();
+      const d = filterData(q);
+      render(d);
+    });
   </script>
 </body>
 </html>
