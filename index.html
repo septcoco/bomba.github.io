@@ -13,10 +13,9 @@
       color: #fff;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       min-height: 100vh;
-      overflow: hidden; /* prevent scroll during slide */
+      overflow: hidden; 
     }
 
-    /* Full-screen viewport so slides move “outside the screen” */
     .slider-viewport {
       position: fixed;
       inset: 0;
@@ -33,7 +32,6 @@
       will-change: transform;
     }
 
-    /* Each slide spans the full viewport so motion happens across the whole screen */
     .slide {
       flex: 0 0 100vw;
       height: 100vh;
@@ -41,7 +39,6 @@
       place-items: center;
     }
 
-    /* Inner square content (keeps your original centered size and ratio) */
     :root { --content-size: clamp(280px, 76vmin, 1200px); }
     .slide-content {
       width: var(--content-size);
@@ -56,7 +53,6 @@
       display: block;
     }
 
-    /* Controls pinned at bottom of the screen */
     .controlsBar {
       position: fixed;
       left: 0;
@@ -78,7 +74,6 @@
       pointer-events: auto;
       box-shadow: 0 6px 20px rgba(0,0,0,.45);
 
-      /* Colors come from inline CSS vars set by React */
       background-color: var(--accent-bg, rgba(255,255,255,.12));
       border: 1px solid var(--accent-border, rgba(255,255,255,.25));
     }
@@ -132,29 +127,32 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- Disable redirect to see slider -->
-  <!-- <meta http-equiv="refresh" content="1; url=/I-/" /> -->
   <title>BREACH</title>
+
+  <!-- Optional: head-level preloads (helpful, keep modest) -->
+  <link rel="preload" as="image" href="/img/logos/breach-logo-1440.png">
+  <link rel="preload" as="image" href="/img/logos/sai-logo.png">
+  <link rel="preload" as="image" href="/img/logos/trench-logo.png">
+  <link rel="preload" as="image" href="/img/logos/blurryface-logo.png">
+  <link rel="preload" as="image" href="/img/logos/bglogo.png">
 </head>
 <body>
   <div id="app"></div>
 
-  <!-- React + Babel (no build needed) -->
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <script type="text/babel">
-    // 4 clickable slides (replace href/src with your pages and images)
     const SLIDES = [
-      { href: "/I-", src: "/img/logos/breach-logo-1440.png", alt: "Clancy - Breach" },
-      { href: "/beta",  src: "/img/logos/sai-logo.png", alt: "Scaled and Icy" },
-      { href: "/gamma", src: "/img/logos/trench-logo.png", alt: "Trench" },
-      { href: "/delta", src: "/img/logos/blurryface-logo.png", alt: "Blurryface" },
-      { href: "/epsilon", src: "/img/logos/bglogo.png",  alt: "Vessel" }
+      { href: "/I-",      src: "/img/logos/breach-logo-1440.png", alt: "Clancy - Breach" },
+      { href: "/beta",    src: "/img/logos/sai-logo.png",         alt: "Scaled and Icy" },
+      { href: "/gamma",   src: "/img/logos/trench-logo.png",      alt: "Trench" },
+      { href: "/delta",   src: "/img/logos/blurryface-logo.png",  alt: "Blurryface" },
+      { href: "/epsilon", src: "/img/logos/bglogo.png",           alt: "Vessel" }
     ];
 
-    // Average color util (graceful fallback if CORS blocks pixel access)
+    // Average color util (CORS-aware; falls back to white)
     function averageColorFromSrc(src) {
       return new Promise((resolve) => {
         const img = new Image();
@@ -185,7 +183,6 @@
 
     const toRGB = ({r,g,b}) => `rgb(${r} ${g} ${b})`;
     const toRGBA = ({r,g,b}, a) => `rgba(${r}, ${g}, ${b}, ${a})`;
-    const luma = ({r,g,b}) => 0.2126*r + 0.7152*g + 0.0722*b; // perceived brightness
 
     function Arrow({ dir, onClick, disabled }) {
       return (
@@ -227,7 +224,10 @@
       const [index, setIndex] = React.useState(0);
       const total = slides.length;
 
-      // Precompute average colors
+      // Refs to <img> nodes for decode()
+      const imgRefs = React.useRef([]);
+
+      // Average colors (for controls)
       const [colors, setColors] = React.useState(Array(total).fill({ r: 255, g: 255, b: 255 }));
       React.useEffect(() => {
         let mounted = true;
@@ -254,7 +254,36 @@
         return () => window.removeEventListener("keydown", onKey);
       }, [index]);
 
-      // Build accent variables from the current image’s average color
+      // Pre-decode current and nearby images so transitions are instant
+      React.useEffect(() => {
+        const nearby = [
+          index,
+          (index + 1) % total,
+          (index - 1 + total) % total,
+          (index + 2) % total
+        ];
+        nearby.forEach(i => {
+          const el = imgRefs.current[i];
+          if (el?.decode) el.decode().catch(() => {});
+        });
+      }, [index, total]);
+
+      // Idle-time preload of all images (gentle)
+      React.useEffect(() => {
+        const idle = window.requestIdleCallback || (fn => setTimeout(fn, 300));
+        const cancel = window.cancelIdleCallback || clearTimeout;
+        const id = idle(() => {
+          slides.forEach(s => {
+            const im = new Image();
+            im.crossOrigin = "anonymous";
+            im.decoding = "async";
+            im.loading = "eager";
+            im.src = s.src;
+          });
+        });
+        return () => cancel(id);
+      }, [slides]);
+
       const col = colors[index] || { r: 255, g: 255, b: 255 };
       const accentSolid = toRGB(col);
       const accentBorder = toRGBA(col, 0.55);
@@ -271,17 +300,33 @@
               className="slider-track"
               style={{ transform: `translate3d(-${index * 100}vw, 0, 0)` }}
             >
-              {slides.map((s, i) => (
-                <section className="slide" key={i} aria-roledescription="slide" aria-label={`Slide ${i+1} of ${total}`}>
-                  <a className="slide-content" href={s.href}>
-                    <img src={s.src} alt={s.alt || `Slide ${i+1}`} draggable="false" />
-                  </a>
-                </section>
-              ))}
+              {slides.map((s, i) => {
+                const isCurrent = i === index;
+                const isNext = i === (index + 1) % total;
+                const isPrev = i === (index - 1 + total) % total;
+                const eager = isCurrent || isNext || isPrev;
+                const priority = (isCurrent || isNext) ? "high" : "low";
+
+                return (
+                  <section className="slide" key={i} aria-roledescription="slide" aria-label={`Slide ${i+1} of ${total}`}>
+                    <a className="slide-content" href={s.href}>
+                      <img
+                        ref={el => (imgRefs.current[i] = el)}
+                        src={s.src}
+                        alt={s.alt || `Slide ${i+1}`}
+                        draggable="false"
+                        decoding="async"
+                        loading={eager ? "eager" : "lazy"}
+                        fetchpriority={priority}
+                        crossOrigin="anonymous"
+                      />
+                    </a>
+                  </section>
+                );
+              })}
             </div>
           </div>
 
-          {/* Bottom controls */}
           <div className="controlsBar">
             <div
               className="controlsGroup"
